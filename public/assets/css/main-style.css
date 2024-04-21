@@ -20,10 +20,10 @@
   --dark: #28292c;
   --info: #0dcaf0;
   --body: #fff;
-  --primary:#00715D;
+  --primary:#0E5B3C;
   --primary-light:#00503f;
   --primary-deep:#005a4a;
-  --secondary:#FFD502;
+  --secondary:#E76267;
   --secondary-light:#d6b200;
   --tertiary:#F0783C;
   --info:#A1DDD2;
@@ -41,8 +41,8 @@
   --primary-paragraph:#666666;
   --secondary-paragraph:#333333;
   --tertiary-paragraph:#787787;
-  --primary-btn:#00715D;
-  --secondary-btn:#FFD502;
+  --primary-btn:#0E5B3C;
+  --secondary-btn:#E76267;
   --tertiary-btn:#090E0D;
   --ratting-color:#FFB840;
   --ratting-color-rgb:255, 193, 7;
@@ -73,7 +73,7 @@
   --helpful-card-bg-two: #D4FDC8;
   --helpful-card-bg-three: #B6F1FF;
   --helpful-card-bg-four: #FFD0B6;
-  --helpful-card-icon-one: #FFD502;
+  --helpful-card-icon-one: #E76267;
   --helpful-card-icon-two: #63D044;
   --helpful-card-icon-three: #30CBF1;
   --helpful-card-icon-four: #FE7B21;
@@ -19489,12 +19489,12 @@ input[type=number] {
 }
 
 .breadcrumb-bg {
-  background: var(--Gredient, linear-gradient(90deg, #00715d 27.6%, rgba(171, 185, 183, 0.13) 72.4%));
+  background: var(--Gredient, linear-gradient(90deg, #0E5B3C 27.6%, rgba(171, 185, 183, 0.13) 72.4%));
   position: relative;
 }
 @media (max-width: 575px) {
   .breadcrumb-bg {
-    background: var(--Gredient, linear-gradient(90deg, #00715d 27.6%, rgb(83, 137, 129) 72.4%));
+    background: var(--Gredient, linear-gradient(90deg, #0E5B3C 27.6%, rgb(83, 137, 129) 72.4%));
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
