@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+    protected $table = "projects";
+    protected $guarded = [];
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where("name", "like", "%{$value}%")
+            ->orWhere("description", "like", "%{$value}%")
+            ->orWhere("short_description", "like", "%{$value}%");
+    }
 
     public function donations()
     {

@@ -39,4 +39,11 @@ class ProjectService
     {
         return Project::paginate($perPage);
     }
+
+    public function search(string $sortDirection, string $search, string $sortColumn, $perPage = 3)
+    {
+        return Project::search($search)
+            ->orderBy($sortColumn, $sortDirection)
+            ->paginate($perPage, ['*'], 'page');
+    }
 }
