@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->unique();
-            $table->uuid('project_key')->unique()->default(DB::raw('UUID()'));
+            $table->uuid('project_key')->unique()->default(DB::raw('(UUID())'));
             $table->string('short_description', 255);
             $table->text('description')->nullable();
             $table->foreignId('creator_id')->constrained('users');

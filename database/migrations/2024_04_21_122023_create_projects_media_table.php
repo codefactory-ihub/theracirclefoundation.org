@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('projects_media', function (Blueprint $table) {
             $table->id();
-            $table->uuid('media_key')->unique()->default(DB::raw('UUID()'));
+            $table->uuid('media_key')->unique()->default(DB::raw('(UUID())'));
             $table->enum('source',['cloudinary', 'youtube']);
             $table->enum('media_type', ['audio', 'video', 'image']);
             $table->string('public_url', 255);
