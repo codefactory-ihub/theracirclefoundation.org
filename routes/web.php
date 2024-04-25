@@ -1,11 +1,15 @@
 <?php
 
-use App\Livewire\Admin\{ProjectList, CreateProject};
+use App\Livewire\Admin\CreateProject;
+use App\Livewire\Admin\ProjectList;
+use App\Livewire\{ContactPage, DonationsPage, ProjectsPage, VolunteerPage, HomePage};
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name("home");
+Route::get('/', HomePage::class)->name("home");
+Route::get('/projects', ProjectsPage::class)->name("projects");
+Route::get('/donate', DonationsPage::class)->name("donate");
+Route::get('/contact', ContactPage::class)->name("contact");
+Route::get('/volunteer', VolunteerPage::class)->name("volunteer");
 
 Route::middleware([
     'auth:sanctum',
