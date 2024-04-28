@@ -596,10 +596,10 @@
   $(document).ready(function(){
     let price_right_parent = $('.priceListing');
     let left_default_amount = $('.left_default_amount').val();
-        price_right_parent.find('.total_donation_amount').text('$'+ left_default_amount);
+        price_right_parent.find('.total_donation_amount').text('₦ '+ left_default_amount);
 
         $(document).on('click','.selectPricing li',function(){
-            let el = '$' + $(this).data('amount');
+            let el = '₦' + $(this).data('amount');
             price_right_parent.find('.total_donation_amount').text(el);
             $('.left_default_amount').val($(this).data('amount'))
         });

@@ -20,7 +20,7 @@
     <meta name="twitter:card" content="summary">
 
     <title>Theracircle Foundation - {{$title}}</title>
-    <link rel="icon" type="image/x-icon" sizes="20x20" href="/assets/images/icon/icon.png">
+    <link rel="icon" type="image/x-icon" sizes="20x20" href="/assets/images/logo/icon.png">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-5.3.0.min.css">
@@ -33,9 +33,16 @@
     <!-- RTL CSS::When Need RTL Uncomments File -->
     <!-- <link rel="stylesheet" type="text/css" href="/assets/css/rtl.css"> -->
     @livewireStyles
+    <script>
+        <?php $loaded = false; ?>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            <?php $loaded = true; ?>
+        });
+    </script>
 </head>
 
 <body>
+    @if(!$loaded)
     <div class="loading-page" id="preloader-active">
         <div class="counter">
             <p class="text text-capitalize">loading</p>
@@ -43,6 +50,7 @@
             <span class="line"></span>
         </div>
     </div>
+    @endif
     <header>
         <div class="header-area-three">
             <div class="main-header">
@@ -53,21 +61,21 @@
                             <div class="col-lg-12 d-none d-lg-block">
                                 <div class="top-menu">
                                     <div class="contact-info">
-                                        <a href="javascript:void(0)" class="pera"> Call Me (+55) -15 02 56<span class="pl-20 pr-20">/</span>Medi.Going@gmail.com </a>
+                                        <a wire:navigate href="javascript:void(0)" class="pera"> Call Me (+55) -15 02 56<span class="pl-20 pr-20">/</span>Medi.Going@gmail.com </a>
                                     </div>
                                     <div class="header-social-link">
                                         <ul class="listing">
                                             <li class="single-list">
-                                                <a href="javascript:void(0)" class="single"><i class="ri-facebook-fill"></i></a>
+                                                <a wire:navigate href="javascript:void(0)" class="single"><i class="ri-facebook-fill"></i></a>
                                             </li>
                                             <li class="single-list">
-                                                <a href="javascript:void(0)" class="single"><i class="ri-youtube-fill"></i></a>
+                                                <a wire:navigate href="javascript:void(0)" class="single"><i class="ri-youtube-fill"></i></a>
                                             </li>
                                             <li class="single-list">
-                                                <a href="javascript:void(0)" class="single"><i class="ri-instagram-line"></i></a>
+                                                <a wire:navigate href="javascript:void(0)" class="single"><i class="ri-instagram-line"></i></a>
                                             </li>
                                             <li class="single-list">
-                                                <a href="javascript:void(0)" class="single"><i class="ri-linkedin-fill"></i></a>
+                                                <a wire:navigate href="javascript:void(0)" class="single"><i class="ri-linkedin-fill"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -85,11 +93,11 @@
                                 <div class="menu-wrapper d-flex align-items-center justify-content-between">
                                     <div class="header-left d-flex align-items-center justify-content-between">
                                         <div class="logo logo-large light-logo">
-                                            <a href="{{route("home")}}"><img src="/assets/images/logo/logo.png" alt="Theracircle Foundation Logo"></a>
+                                            <a wire:navigate href="{{route("home")}}"><img src="/assets/images/logo/logo.png" alt="Theracircle Foundation Logo"></a>
                                         </div>
                                         <!-- Logo Mobile-->
                                         <div class="logo logo-mobile light-logo">
-                                            <a href="{{route("home")}}"><img src="/assets/images/icon/icon.png" alt="Theracircle Foundation Icon"></a>
+                                            <a wire:navigate href="{{route("home")}}"><img src="/assets/images/icon/icon.png" alt="Theracircle Foundation Icon"></a>
                                         </div>
                                     </div>
                                     <div class="search-container">
@@ -101,19 +109,17 @@
                                         <nav>
                                             <ul class="listing" id="navigation">
                                                 <li class="single-list">
-                                                    <a href="{{route("home")}}" class="single {{request()->routeIs('home') ? 'active': ''}}">Home</a>
-                                                </li>
-                                                <li class="single-list">
-                                                    <a href="#about" class="single {{request()->routeIs('/#about') ? 'active': ''}}">About <i class="ri-arrow-down-s-line"></i></a>
+                                                    <a wire:navigate href="{{route("home")}}" class="single {{request()->routeIs('home') ? 'active': ''}}">Home<i class="ri-arrow-down-s-line"></i></a>
                                                     <ul class="submenu">
-                                                        <li class="single-list"><a href="{{route("home")}}#about" class="single">Mission Statement</a></li>
-                                                        <li class="single-list"><a href="{{route("home")}}#mission" class="single">Vission Statement</a></li>
+                                                        <li class="single-list"><a wire:navigate href="{{route("home")}}" class="single">Home</a></li>
+                                                        <li class="single-list"><a wire:navigate href="{{route("home")}}#about" class="single">About</a></li>
+                                                        <li class="single-list"><a wire:navigate href="{{route("home")}}#about" class="single">Words From Our Founder</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="single-list"><a href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donation</a></li>
-                                                <li class="single-list"><a href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
-                                                <li class="single-list"><a href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
-                                                <li class="single-list"><a href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li>
+                                                <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donation</a></li>
+                                                <li class="single-list"><a wire:navigate href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
+                                                <li class="single-list"><a wire:navigate href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
+                                                <!-- <li class="single-list"><a wire:navigate href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li> -->
                                             </ul>
                                         </nav>
                                     </div>
@@ -121,7 +127,7 @@
                                         <!-- Right button -->
                                         <ul class="cart">
                                             <li class="cart-list d-lg-inline-block">
-                                                <a href="{{route("donate")}}" class="btn-primary-fill text-uppercase">
+                                                <a wire:navigate href="{{route("donate")}}" class="btn-primary-fill text-uppercase">
                                                     <span class="pera">Donation</span>
                                                 </a>
                                             </li>
@@ -150,25 +156,24 @@
                             <div class="header-left d-flex align-items-center justify-content-between">
                                 <!-- Logo-->
                                 <div class="logo">
-                                    <a href="{{route("home")}}"><img src="/assets/images/logo/logo.png" alt="logo"></a>
+                                    <a wire:navigate href="{{route("home")}}"><img src="/assets/images/logo/logo.png" alt="logo"></a>
                                 </div>
                             </div>
                             <!-- Footer-menu -->
                             <div class="main-menu d-none d-lg-block">
                                 <nav>
                                     <ul class="listing" id="navigation2">
-                                        <li class="single-list"><a href="{{route("home")}}" class="single {{request()->routeIs('home') ? 'active': ''}}">Home</a></li>
-                                        <li class="single-list"><a href="/#about" class="single {{request()->routeIs('home') ? 'active': ''}}">About</a></li>
-                                        <li class="single-list"><a href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donation</a></li>
-                                        <li class="single-list"><a href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
-                                        <li class="single-list"><a href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
-                                        <li class="single-list"><a href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li>
+                                        <li class="single-list"><a wire:navigate href="{{route("home")}}" class="single {{request()->routeIs('home') ? 'active': ''}}">Home</a></li>
+                                        <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donation</a></li>
+                                        <li class="single-list"><a wire:navigate href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
+                                        <li class="single-list"><a wire:navigate href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
+                                        <!-- <li class="single-list"><a wire:navigate href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li> -->
                                     </ul>
                                 </nav>
                             </div>
                             <!-- Right button -->
                             <ul class="cart">
-                                <li class="cart-list"><a href="{{route("donate")}}" class="donate-btn">Donate</a></li>
+                                <li class="cart-list"><a wire:navigate href="{{route("donate")}}" class="donate-btn">Donate</a></li>
                             </ul>
                         </div>
                     </div>
@@ -183,10 +188,10 @@
                                     <a class="single" href="/#about">About Company</a>
                                 </li>
                                 <li class="single-list">
-                                    <a class="single" href="{{route('projects')}}">Latest Projects</a>
+                                    <a wire:navigate class="single" href="{{route('projects')}}">Latest Projects</a>
                                 </li>
                                 <li class="single-list">
-                                    <a class="single" href="/#about">Our Mission</a>
+                                    <a wire:navigate class="single" href="/#about">Our Mission</a>
                                 </li>
                             </ul>
                         </div>
@@ -201,7 +206,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-mail-fill"></i>
                                         </div>
-                                        <a class="single" href="javascript:void(0)">donation@gmail.com</a>
+                                        <a wire:navigate class="single" href="javascript:void(0)">donation@gmail.com</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
@@ -209,7 +214,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-phone-fill"></i>
                                         </div>
-                                        <a class="single" href="javascript:void(0)">(+88) 111-222-333</a>
+                                        <a wire:navigate class="single" href="javascript:void(0)">(+88) 111-222-333</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
@@ -217,46 +222,46 @@
                                         <div class="imp-icon">
                                             <i class="ri-map-pin-2-fill"></i>
                                         </div>
-                                        <a class="single" href="javascript:void(0)">Tropical Cyclone, Volcano</a>
+                                        <a wire:navigate class="single" href="javascript:void(0)">Tropical Cyclone, Volcano</a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6">
+                    <!-- <div class="col-xl-4 col-lg-6">
                         <div class="footer-link">
                             <h4 class="title">Projects</h4>
                             <ul class="imp-link">
                                 <li class="single-list">
                                     <div class="d-flex gap-20 mb-20 align-items-center">
                                         <div class="project-img">
-                                            <a href="{{route("donate")}}">
+                                            <a wire:navigate href="{{route("donate")}}">
                                                 <img src="/assets/images/gallery/project-1.png" alt="image">
                                             </a>
                                         </div>
 
                                         <div class="project-info">
                                             <p class="project-date">12.Oct.2023</p>
-                                            <h4 class="project-title"><a href="{{route("donate")}}">18 Best Charity Marketing Champions</a></h4>
+                                            <h4 class="project-title"><a wire:navigate href="{{route("donate")}}">18 Best Charity Marketing Champions</a></h4>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="single-list">
                                     <div class="d-flex gap-20">
                                         <div class="project-img">
-                                            <a href="{{route("donate")}}">
+                                            <a wire:navigate href="{{route("donate")}}">
                                                 <img src="/assets/images/gallery/project-2.png" alt="image">
                                             </a>
                                         </div>
                                         <div class="project-info">
                                             <p class="project-date">20.Oct.2023</p>
-                                            <h4 class="project-title"><a href="{{route("donate")}}">Charity starts from home. You Can't Even Help,</a></h4>
+                                            <h4 class="project-title"><a wire:navigate href="{{route("donate")}}">Charity starts from home. You Can't Even Help,</a></h4>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <hr class="footer-line">
             </div>
@@ -267,20 +272,20 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="footer-copy-right text-center">
-                                    <p class="pera">Copyright © {{date("Y")}} <a class="text-secondary" href="https://codefactory.com.ng">Codefactory Innovative Hub</a>. All rights reserved.</p>
+                                    <p class="pera">Copyright © {{date("Y")}} <a wire:navigate class="text-secondary" href="https://codefactory.com.ng">Codefactory Innovative Hub</a>. All rights reserved.</p>
                                     <div class="footer-social-link">
                                         <ul class="listing">
                                             <li class="single-list">
-                                                <a class="single" href=""><i class="ri-facebook-fill"></i></a>
+                                                <a wire:navigate class="single" href=""><i class="ri-facebook-fill"></i></a>
                                             </li>
                                             <li class="single-list">
-                                                <a class="single" href=""><i class="ri-youtube-fill"></i></a>
+                                                <a wire:navigate class="single" href=""><i class="ri-youtube-fill"></i></a>
                                             </li>
                                             <li class="single-list">
-                                                <a class="single" href=""><i class="ri-instagram-line"></i></a>
+                                                <a wire:navigate class="single" href=""><i class="ri-instagram-line"></i></a>
                                             </li>
                                             <li class="single-list">
-                                                <a class="single" href=""><i class="ri-linkedin-fill"></i></a>
+                                                <a wire:navigate class="single" href=""><i class="ri-linkedin-fill"></i></a>
                                             </li>
                                         </ul>
                                     </div>
