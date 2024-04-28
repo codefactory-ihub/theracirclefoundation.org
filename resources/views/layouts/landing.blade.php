@@ -97,7 +97,7 @@
                                         </div>
                                         <!-- Logo Mobile-->
                                         <div class="logo logo-mobile light-logo">
-                                            <a wire:navigate href="{{route("home")}}"><img src="/assets/images/logo/icon.png" alt="Theracircle Foundation Icon"></a>
+                                            <a wire:navigate href="{{route("home")}}"><img style="width: 40px;" src="/assets/images/logo/icon.png" alt="Theracircle Foundation Icon"></a>
                                         </div>
                                     </div>
                                     <div class="search-container">
