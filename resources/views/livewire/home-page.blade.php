@@ -77,20 +77,18 @@
                 @foreach($objectives as $obj)
                 <div id="helpful-area-card" class="col-xl-4 col-md-6 col-lg-6">
                     <div class="helpful-card wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="helpful-card-icon">
-                            @if(isset($obj['icon']))
-                            <i class="{{$obj['icon']}}"></i>
-                            @else
-                            <img width="100" height="100" class="rounded-circle" src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-06-1024x1024.png" />
-                            @endif
-
-                        </div>
                         <div class="helpful-card-caption">
-                            @if(isset($obj['icon']))
                             <h4 class="caption-title">{{$obj['title']}}</h4>
-                            @endif
                             <p class="caption-para">{{$obj['description']}}</p>
                             <!-- <a wire:navigate href="javascript:void(0)" class="btn btn-outline-success">Volunteer Now <i class="ri-arrow-right-up-line"></i></a> -->
+
+                            <div class="row gap-1 justify-content-center">
+                                @foreach($obj['sdg_icons'] as $sdg)
+                                <a class="col-xl-2 col-3" href="/assets/images/sdg-icons/sdg-{{$sdg}}.svg" data-lightbox="{{$obj['title']}}" data-title="{{$obj['title']}} - SDG {{$sdg}}">
+                                    <img height="auto" src="/assets/images/sdg-icons/sdg-{{$sdg}}.svg" />
+                                </a>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="number-watermark">
                             <h4 class="number">0{{$loop->index+1}}</h4>
@@ -329,4 +327,14 @@
     </section>
     <!-- End-of Donate -->
     @endif
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.js" integrity="sha512-oaWLach/xXzklmJDBjHkXngTCAkPch9YFqOSphnw590sy86CVEnAbcpw17QjkUGppGmVJojwqHmGO/7Xxx6HCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            maxWidth: 300,
+            maxHeight: 300,
+        })
+    </script>
 </main>
