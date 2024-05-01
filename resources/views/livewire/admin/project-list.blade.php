@@ -39,7 +39,7 @@
                                     <span class="dt-column-title">Description</span>
                                 </th>
                                 <th class="dt-orderable-asc dt-orderable-desc">
-                                    <span class="dt-column-title">Created At</span>
+                                    <span class="dt-column-title">Creation Time</span>
                                 </th>
                                 <th class="dt-orderable-asc dt-orderable-desc">
                                     <span class="dt-column-title">Actions</span>

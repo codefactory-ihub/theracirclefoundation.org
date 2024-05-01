@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    @if(!$loaded)
+
     <div class="loading-page" id="preloader-active">
         <div class="counter">
             <p class="text text-capitalize">loading</p>
@@ -50,7 +50,7 @@
             <span class="line"></span>
         </div>
     </div>
-    @endif
+
     <header>
         <div class="header-area-three">
             <div class="main-header">
@@ -116,7 +116,7 @@
                                                         <li class="single-list"><a wire:navigate href="{{route("home")}}#about" class="single">Words From Our Founder</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donation</a></li>
+                                                <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donate</a></li>
                                                 <li class="single-list"><a wire:navigate href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
                                                 <li class="single-list"><a wire:navigate href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
                                                 <!-- <li class="single-list"><a wire:navigate href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li> -->
@@ -128,7 +128,7 @@
                                         <ul class="cart">
                                             <li class="cart-list d-lg-inline-block">
                                                 <a wire:navigate href="{{route("donate")}}" class="btn-primary-fill text-uppercase">
-                                                    <span class="pera">Donation</span>
+                                                    <span class="pera">Donate</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -164,7 +164,7 @@
                                 <nav>
                                     <ul class="listing" id="navigation2">
                                         <li class="single-list"><a wire:navigate href="{{route("home")}}" class="single {{request()->routeIs('home') ? 'active': ''}}">Home</a></li>
-                                        <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donation</a></li>
+                                        <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donate</a></li>
                                         <li class="single-list"><a wire:navigate href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
                                         <li class="single-list"><a wire:navigate href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
                                         <!-- <li class="single-list"><a wire:navigate href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li> -->
@@ -316,6 +316,43 @@
     <!-- Main js-->
     <script src="/assets/js/main.js"></script>
     @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        document.addEventListener('livewire:initialized', function() {
+            Livewire.hook('component.init', ({
+                component,
+                cleanup
+            }) => {
+                $('#preloader-active').delay(200).fadeOut(1);
+                $('body').delay(1).css({
+                    'overflow': 'visible'
+                });
+                var counter = 0;
+                var c = 0;
+                var i = setInterval(function() {
+                    $(".loading-page .counter .number").html(c + "%");
+                    $(".loading-page .counter .line").css("width", c + "%");
+
+                    counter++;
+                    c++;
+                    if (counter == 101) {
+                        clearInterval(i);
+                    }
+                }, 10);
+            })
+            Livewire.on('notification', function(payload) {
+                let [message, title, type] = payload;
+
+                if (type == "success")
+                    toastr.success(message, title)
+                else if (type == "danger")
+                    toastr.error(message, title)
+                else
+                    toastr.info(message, title)
+            });
+        });
+    </script>
 </body>
 
 </html>

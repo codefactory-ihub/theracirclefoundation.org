@@ -18,6 +18,12 @@
                     <x-nav-link href="{{ route('admin.projects') }}" :active="request()->routeIs('admin.projects') || request()->routeIs('admin.create-project')">
                         {{ __('Projects') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('admin.volunteers') }}" :active="request()->routeIs('admin.volunteers')">
+                        {{ __('Volunteers') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('admin.volunteers') }}" :active="request()->routeIs('admin.volunteers')">
+                        {{ __('Donations') }}
+                    </x-nav-link>
                 </div>
             </div>
 
