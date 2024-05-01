@@ -48,7 +48,7 @@
                 </div>
               </div>
               <div class="col-xl-6">
-                <img class="map-frame" src="https://images.unsplash.com/photo-1695654397565-b904c10fe594?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="600" height="450" style="border: 15px;object-fit:cover;" />
+                <img class="map-frame" src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="600" height="450" style="border: 15px;object-fit:cover;" />
               </div>
             </div>
           </div>

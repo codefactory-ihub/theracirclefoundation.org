@@ -61,7 +61,7 @@
                             <div class="col-lg-12 d-none d-lg-block">
                                 <div class="top-menu">
                                     <div class="contact-info">
-                                        <a wire:navigate href="javascript:void(0)" class="pera"> Call Me (+55) -15 02 56<span class="pl-20 pr-20">/</span>Medi.Going@gmail.com </a>
+                                        <a wire:navigate href="tel:+2349012245699" class="pera"> Call Me (+234) -901 224 5699<span class="pl-20 pr-20">/</span>info@theracircle.org</a>
                                     </div>
                                     <div class="header-social-link">
                                         <ul class="listing">
@@ -185,7 +185,7 @@
                             <h4 class="title">Explore Links</h4>
                             <ul class="imp-link">
                                 <li class="single-list">
-                                    <a class="single" href="/#about">About Company</a>
+                                    <a class="single" href="/#about">About NGO</a>
                                 </li>
                                 <li class="single-list">
                                     <a wire:navigate class="single" href="{{route('projects')}}">Latest Projects</a>
@@ -206,7 +206,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-mail-fill"></i>
                                         </div>
-                                        <a wire:navigate class="single" href="javascript:void(0)">donation@gmail.com</a>
+                                        <a wire:navigate class="single" href="mailto:info@theracircle.org">info@theracircle.org</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
@@ -214,7 +214,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-phone-fill"></i>
                                         </div>
-                                        <a wire:navigate class="single" href="javascript:void(0)">(+88) 111-222-333</a>
+                                        <a wire:navigate class="single" href="tel:+2349012245699">(+234) -901 224 5699</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
@@ -222,7 +222,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-map-pin-2-fill"></i>
                                         </div>
-                                        <a wire:navigate class="single" href="javascript:void(0)">Tropical Cyclone, Volcano</a>
+                                        <a wire:navigate class="single" href="javascript:void(0)">Lagos, Nigeria</a>
                                     </div>
                                 </li>
                             </ul>
@@ -272,7 +272,8 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="footer-copy-right text-center">
-                                    <p class="pera">Copyright © {{date("Y")}} <a wire:navigate class="text-secondary" href="https://codefactory.com.ng">Codefactory Innovative Hub</a>. All rights reserved.</p>
+                                    <p class="pera">Copyright © {{date("Y")}} <a wire:navigate class="text-secondary" href="https://theracirclefoundation.org">TheraCircle Foundation</a>. All rights reserved.</p>
+                                    <p class="pera">Designed by <a wire:navigate class="text-secondary" href="https://codefactory.com.ng">Codefactory Innovative Hub</a></p>
                                     <div class="footer-social-link">
                                         <ul class="listing">
                                             <li class="single-list">
