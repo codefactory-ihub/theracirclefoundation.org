@@ -33,10 +33,12 @@ class VolunteerPage extends Component
     {
         $this->validate();
         $data = $this->only('fullName', 'emailAddress', 'age', 'phoneNumber', 'reason');
+
         try {
             $volunteerService->create($data);
             $this->dispatch('notification', 'Your have successfully applied to be a volunteer.', 'Application Successful', 'success');
-            $this->reset('fullName', 'emailAddress', 'age', 'phoneNumber', 'reason');
+            // $this->reset('fullName', 'emailAddress', 'age', 'phoneNumber', 'reason');
+            $this->reset();
         } catch (\Throwable $th) {
             $this->dispatch('notification', $th->getMessage(), 'Something went wrong', 'danger');
         }

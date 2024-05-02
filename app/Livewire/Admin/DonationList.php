@@ -2,12 +2,11 @@
 
 namespace App\Livewire\Admin;
 
-
-use App\Services\ProjectService;
+use App\Models\Donation;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ProjectList extends Component
+class DonationList extends Component
 {
     use WithPagination;
 
@@ -23,11 +22,28 @@ class ProjectList extends Component
         if (session()->has('page'))
             $this->page = session('page');
     }
-
-    public function render(ProjectService $projectService)
+    public function render()
     {
-        $projects = $projectService->search($this->sortDirection, $this->search, $this->sortColumn, $this->perPage);
-        return view('livewire.admin.project-list', compact('projects'));
+        $donations = $this->search($this->sortDirection, $this->search, $this->sortColumn, $this->perPage);
+        return view('livewire.admin.donation-list', compact('donations'));
+    }
+
+    public function customFormat($column, $data)
+    {
+        switch ($column) {
+            case 'created_at':
+                $parsedDate = \Carbon\Carbon::parse($data);
+                return $parsedDate->diffForHumans();
+            default:
+                return $data;
+        }
+    }
+
+    public function search(string $sortDirection, string $search, string $sortColumn, $perPage = 3)
+    {
+        return Donation::search($search)
+            ->orderBy($sortColumn, $sortDirection)
+            ->paginate($perPage, ['*'], 'page');
     }
 
     /**

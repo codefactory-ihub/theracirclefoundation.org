@@ -116,9 +116,9 @@
                                                         <li class="single-list"><a wire:navigate href="{{route("home")}}#about" class="single">Words From Our Founder</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="single-list"><a wire:navigate href="{{route("donate")}}" class="single {{request()->routeIs('donate') ? 'active': ''}}">Donate</a></li>
                                                 <li class="single-list"><a wire:navigate href="{{route("projects")}}" class="single {{request()->routeIs('projects') ? 'active': ''}}">Project</a></li>
                                                 <li class="single-list"><a wire:navigate href="{{route("volunteer")}}" class="single {{request()->routeIs('volunteer') ? 'active': ''}}">Volunteer</a></li>
+                                                <li class="single-list"><a wire:navigate href="{{route("request-report")}}" class="single {{request()->routeIs('request-report') ? 'active': ''}}">Reports</a></li>
                                                 <!-- <li class="single-list"><a wire:navigate href="{{route("contact")}}" class="single {{request()->routeIs('contact') ? 'active': ''}}">Contact</a></li> -->
                                             </ul>
                                         </nav>
