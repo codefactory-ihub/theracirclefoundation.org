@@ -14,9 +14,9 @@ Route::get('/contact', ContactPage::class)->name("contact");
 Route::get('/volunteer', VolunteerPage::class)->name("volunteer");
 Route::get('/request-report', ReportRequestForm::class)->name("request-report");
 
-Route::get('/register', [RegisteredUserController::class, 'create'])
-    ->middleware(['auth'])
-    ->name('register');
+// Route::get('/register', [RegisteredUserController::class, 'create'])
+//     ->middleware(['auth'])
+//     ->name('register');
 
 Route::middleware([
     'auth:sanctum',
