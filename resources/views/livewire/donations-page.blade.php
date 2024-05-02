@@ -5,7 +5,7 @@
             <div class="breadcrumb-text">
                 <nav aria-label="breadcrumb" class="breadcrumb-nav wow fadeInUp" data-wow-delay="0.0s">
                     <ul class="breadcrumb listing">
-                        <li class="breadcrumb-item single-list"><a href="index.html" class="single">Home</a></li>
+                        <li class="breadcrumb-item single-list"><a href="{{ route('home') }}" class="single">Home</a></li>
                         <li class="breadcrumb-item single-list" aria-current="page"><a href="javascript:void(0)" class="single">Donation</a></li>
                     </ul>
                 </nav>
@@ -33,12 +33,12 @@
                             <li class="listItem" data-amount="50000">₦ 50,000</li>
                             <li class="listItem" data-amount="100000">₦ 100,000</li>
                         </ul>
-                        <form method="post" wire:submit="donate">
+                        <form onsubmit="initFlutterwaveDonation()">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="contact-form mb-24">
                                         <label class="contact-label required">Amount</label>
-                                        <input class="form-control contact-input left_default_amount" wire:model.blur="amount" type="number" min="100" value="2000" placeholder="₦ 2,000">
+                                        <input class="form-control contact-input left_default_amount" wire:model.blur="amount" id="amount" type="number" min="100" value="2000" placeholder="₦ 2,000">
                                         @error('amount')
                                         <span class="text-danger mt-1">{{ $message }}</span>
                                         @enderror
@@ -48,7 +48,7 @@
                                 <div class="col-lg-4">
                                     <div class="contact-form mb-24">
                                         <label class="contact-label">Name</label>
-                                        <input class="form-control contact-input" wire:model.blur="name" type="text" placeholder="e.g Alex">
+                                        <input class="form-control contact-input" wire:model.blur="name" id="name" type="text" placeholder="e.g Alex">
                                         @error('name')
                                         <span class="text-danger mt-1">{{ $message }}</span>
                                         @enderror
@@ -57,7 +57,7 @@
                                 <div class="col-lg-4">
                                     <div class="contact-form mb-24">
                                         <label class="contact-label">Email</label>
-                                        <input class="form-control contact-input" type="email" wire:model.blur="email" placeholder="e.g example@gmail.com">
+                                        <input class="form-control contact-input" type="email" wire:model.blur="email" id="email" placeholder="e.g example@gmail.com">
                                         @error('email')
                                         <span class="text-danger mt-1">{{ $message }}</span>
                                         @enderror
@@ -66,7 +66,7 @@
                                 <div class="col-lg-4">
                                     <div class="contact-form mb-24">
                                         <label class="contact-label">Phone Number</label>
-                                        <input class="form-control contact-input" type="email" wire:model.blur="phone_number" placeholder="e.g +2347********">
+                                        <input class="form-control contact-input" type="tel" wire:model.blur="phone_number" id="phone_number" placeholder="e.g +2347********">
                                         @error('phone_number')
                                         <span class="text-danger mt-1">{{ $message }}</span>
                                         @enderror
@@ -76,7 +76,7 @@
                                 <div class="col-lg-12">
                                     <div class="contact-form mb-24">
                                         <label class="contact-label">Message</label>
-                                        <textarea class="form-control custom-textarea" wire:model.blur="notes" rows="10" placeholder="Say something to us"></textarea>
+                                        <textarea class="form-control custom-textarea" wire:model.blur="notes" id="notes" rows="10" placeholder="Say something to us"></textarea>
                                         @error('notes')
                                         <span class="text-danger mt-1">{{ $message }}</span>
                                         @enderror
@@ -112,9 +112,9 @@
                                     <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="remember-me terms-condition">
+                                <!-- <div class="remember-me terms-condition">
                                     <label>
-                                        <input class="checkbox-style" wire:model.blur="terms" type="checkbox" value="remember" name="remember">
+                                        <input class="checkbox-style" wire:model.blur="terms" id="terms" type="checkbox" value="remember" name="remember">
                                         <small>I agree to all the
                                             <a href="#">
                                                 <span>Terms</span></a> and <a href="#"><span>Privacy policy</span>
@@ -122,10 +122,10 @@
                                         </small>
                                         <span class="checkmark-style"></span>
                                     </label>
-                                    @error('terms')
-                                    <div class="text-danger mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                    error('terms')
+                                    <div class="text-danger mt-1"> $message }}</div>
+                                    enderror
+                                </div> -->
                                 <button type="submit" class="btn-primary-submit">
                                     Donate
                                     <div wire:loading>
@@ -150,7 +150,7 @@
                     <div class="blog-section-two">
                         <div class="single-blog h-calc">
                             <div class="blog-img position-relative">
-                                <a href="blog-details.html"> <img src="https://images.unsplash.com/photo-1630510590435-8c0dc8d7c7ee?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt="img"> </a>
+                                <a href="#"> <img src="https://images.unsplash.com/photo-1630510590435-8c0dc8d7c7ee?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt="img"> </a>
                                 <div class="blog-img-overlay-text"></div>
                             </div>
                             <!-- Payment Details -->
@@ -183,4 +183,39 @@
         </div>
     </div>
     <!--End-of Donation Payment -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script>
+        async function initFlutterwaveDonation() {
+            event.preventDefault();
+
+            let isValid = await @this.validateForm();
+
+            if (isValid)
+                FlutterwaveCheckout({
+                    public_key: "YOUR_PUBLIC_KEY",
+                    tx_ref: "UNIQUE_TRANSACTION_REFERENCE",
+                    amount: @js($amount),
+                    customer_email: @js($email),
+                    currency: "NGN",
+                    payment_options: "card, banktransfer, ussd, qr",
+                    customer: {
+                        email: @js($email),
+                        phonenumber: @js($phone_number),
+                        name: @js($name)
+                    },
+                    callback: function(data) {
+                        console.log(data);
+                        @this.donate();
+                    },
+                    onclose: function() {
+                        alert("Payment canceled!");
+                    },
+                    customizations: {
+                        title: "Donation to Our Cause",
+                        description: "Support our cause with a donation.",
+                        logo: "/assets/images/logo/logo.png"
+                    }
+                });
+        }
+    </script>
 </main>

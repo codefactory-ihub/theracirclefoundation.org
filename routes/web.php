@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Admin\{CreateProject, ProjectList, ReportRequestList, VolunteerList};
+use App\Livewire\Admin\{CreateProject, DonationList, ProjectList, ReportRequestList, VolunteerList};
 use App\Livewire\{ContactPage, DonationsPage, ProjectsPage, VolunteerPage, HomePage, ReportRequestForm};
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +29,6 @@ Route::middleware([
     Route::get('admin/projects', ProjectList::class)->name("admin.projects");
     Route::get('admin/projects/create', CreateProject::class)->name("admin.create-project");
     Route::get('admin/volunteers', VolunteerList::class)->name("admin.volunteers");
-    Route::get('admin/donations', VolunteerList::class)->name("admin.donations");
+    Route::get('admin/donations', DonationList::class)->name("admin.donations");
     Route::get('admin/report-requests', ReportRequestList::class)->name("admin.report-requests");
 });
