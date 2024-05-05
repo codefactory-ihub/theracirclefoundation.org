@@ -26,12 +26,12 @@ class HomePage extends Component
             'sdg_icons' => [1, 4, 5, 8, 10, 16, 17]
         ],
         [
-            'title' => 'Economic',
+            'title' => 'Economic Empowerment and sustainable development',
             'description' => 'Support and facilitate the economic development, and empowerment of hitherto underserved, vulnerable groups (as detailed in objective b above) on socio-political and socio-economic rights, through the raising awareness of their rights and promoting activities that uphold basic human rights and necessities as ascribed by the Human Developmental Index.',
             'sdg_icons' => [1, 4, 5, 8, 9, 10]
         ],
         [
-            'title' => 'Economic Empowerment and Sustainable development ',
+            'title' => 'Research',
             'description' => 'Support scientific research in areas that promote healthy, resilient, environmentally sustainable populations globally. Primary focus would be on health, and wellbeing, the shared environment, Sustainable development goals, Basic Human Rights and Environmental, Social, Governance (ESG) compliance.',
             'sdg_icons' => [4, 8, 9, 11, 16, 17]
         ],

@@ -8,7 +8,8 @@
                         <div class="hero-caption mb-20">
                             <p class="key-title font-700 mb-20">TheraCircle Foundation</p>
                             <h1 class="title font-700" data-animation="fadeInUp" data-delay=".0s">Empowering Women, Nurturing Change</h1>
-                            <p class="pera mx-width-780" data-animation="fadeInUp" data-delay=".2s">TheraCircle Foundation is a global non-profit organization, led by Black women, dedicated to empowering disadvantaged women and girls while fostering a healthier planet</p>
+                            <p class="pera mx-width-780" data-animation="fadeInUp" data-delay=".2s">
+                                TheraCircle Foundation is a global non-profit organization, led by Black women, dedicated to empowering disadvantaged women and girls while fostering a healthier planet</p>
                             <div class="d-flex gap-20 flex-wrap align-items-center">
                                 <a wire:navigate href="{{route("donate")}}" class="btn-primary-fill pill-btn" data-animation="fadeInLeft" data-delay=".4s">Donate Now</a>
                                 <!-- <div class="d-flex">
@@ -116,6 +117,15 @@
                         <h2 class="title font-700 pb-15">About</h2>
                         <p class="pera-subtitle mb-15">TheraCircle Foundation is a global non-profit organization, led by Black women, dedicated to empowering disadvantaged women and girls while fostering a healthier planet.</p>
                         <p class="pera-subtitle">We understand the unique challenges faced by these communities and strive to create positive change through a holistic approach.</p>
+                        <p class="pera-subtitle mt-2">
+                        <ol>
+                            <li><b>Education and Economic Empowerment:</b> At TheraCircle, we believe education is the key to breaking the cycle of poverty. We provide educational opportunities and resources for women, equipping them with the skills and knowledge they need to secure livelihoods and build brighter futures. We track our impact through measurable metrics, ensuring our programs translate into tangible economic improvement.</li>
+                            <li><b>Health and Wellbeing:</b> We prioritize the health and well-being of women and girls. We advocate for access to essential healthcare services, including menstrual hygiene management and mental health support. Additionally, we champion WASH (Water, Sanitation, and Hygiene) programs and vocational training initiatives to create a sustainable foundation for well-being.</li>
+                            <li><b>Sustainability and Climate Action:</b> TheraCircle recognizes the interconnectedness of social, environmental, and health issues. We collaborate with academia and stakeholders to support research on climate change, environmental sustainability, and their impact on health and social structures. Through public education initiatives, we empower communities to understand the complexities of linear economic models and embrace sustainable practices.
+                                By supporting TheraCircle, you invest in a future where women and girls thrive, and our planet flourishes.
+                                Together, we can create a ripple effect of positive change.</li>
+                        </ol>
+                        </p>
                         @else
                         <h2 class="title font-700 pb-15">Words From The Founder</h2>
                         <figure>
@@ -140,7 +150,7 @@
                                     </div>
                                     <div class="info-content">
                                         <h4 class="title">Donation</h4>
-                                        <p class="pera">Fund programs that help children escape poverty providing vocational training.</p>
+                                        <p class="pera">Empower women and girls, promote good health and wellbeing, and fight climate change – all by supporting TheraCircle Foundation! Donate and be a part of a healthier planet and brighter futures. Your donation can help us provide education and healthcare access to disadvantaged communities, while fostering environmental sustainability – creating a ripple effect of positive change.</p>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +174,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="position-relative h-100">
+                    <div class="position-relative">
                         <div class="play-button">
                             <a id="play-video-two" class="video-play-button-two d-none d-lg-block d-none d-lg-block" href="javascript:void(0)">
                                 <span></span>

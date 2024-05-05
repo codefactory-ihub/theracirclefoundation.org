@@ -273,7 +273,7 @@
                             <div class="col-xl-12">
                                 <div class="footer-copy-right text-center">
                                     <p class="pera">Copyright © {{date("Y")}} <a wire:navigate class="text-secondary" href="https://theracirclefoundation.org">TheraCircle Foundation</a>. All rights reserved.</p>
-                                    <p class="pera">Designed by <a wire:navigate class="text-secondary" href="https://codefactory.com.ng">Codefactory Innovative Hub</a></p>
+
                                     <div class="footer-social-link">
                                         <ul class="listing">
                                             <li class="single-list">
