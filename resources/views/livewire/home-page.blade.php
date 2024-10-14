@@ -162,7 +162,7 @@
 
                                     <div class="info-content">
                                         <h4 class="title">Volunteer</h4>
-                                        <p class="pera">Volunteer programs that help children escape poverty providing vocational training.</p>
+                                        <p class="pera">Do you have a cause you care deeply about? Are you willing to lend a hand and make a positive impact? If you're passionate, selfless, and determined, we need you! Join our volunteer team and be a part of something bigger.</p>
                                     </div>
                                 </div>
                             </div>
