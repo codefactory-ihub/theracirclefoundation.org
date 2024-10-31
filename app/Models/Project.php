@@ -2,14 +2,23 @@
 
 namespace App\Models;
 
+use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
     use HasFactory;
+    use MediaAlly;
     protected $table = "projects";
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'project_key',
+        'project_date',
+        'short_description',
+        'description',
+        'creator_id',
+    ];
 
     public function scopeSearch($query, $value)
     {

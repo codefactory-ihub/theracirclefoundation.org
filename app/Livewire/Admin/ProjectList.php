@@ -11,6 +11,7 @@ class ProjectList extends Component
 {
     use WithPagination;
 
+    public $deleting = '';
     public $page = 1;
     public $perPage = 15;
     public $search = '';
@@ -65,5 +66,14 @@ class ProjectList extends Component
     public function updatedPage()
     {
         session(['page' => $this->page]);
+    }
+
+    public function deleteProject(string $projectKey, ProjectService $projectService)
+    {
+        if ($this->deleting == '') {
+            $this->deleting = $projectKey;
+            $projectService->delete($projectKey);
+            $this->deleting = '';
+        }
     }
 }
