@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Admin\{CreateProject, DonationList, ProjectList, ReportRequestList, VolunteerList};
+use App\Livewire\Admin\{CreateProject, UpdateProject, DonationList, ProjectList, ReportRequestList, VolunteerList};
 use App\Livewire\{ContactPage, DonationsPage, ProjectsPage, VolunteerPage, HomePage, ReportRequestForm};
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +14,9 @@ Route::get('/contact', ContactPage::class)->name("contact");
 Route::get('/volunteer', VolunteerPage::class)->name("volunteer");
 Route::get('/request-report', ReportRequestForm::class)->name("request-report");
 
-// Route::get('/register', [RegisteredUserController::class, 'create'])
-//     ->middleware(['auth'])
-//     ->name('register');
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    // ->middleware(['auth'])
+    ->name('register');
 
 Route::middleware([
     'auth:sanctum',
@@ -28,6 +28,7 @@ Route::middleware([
     })->name('dashboard');
     Route::get('admin/projects', ProjectList::class)->name("admin.projects");
     Route::get('admin/projects/create', CreateProject::class)->name("admin.create-project");
+    Route::get('admin/projects/update/{projectKey}', UpdateProject::class)->name("admin.update-project");
     Route::get('admin/volunteers', VolunteerList::class)->name("admin.volunteers");
     Route::get('admin/donations', DonationList::class)->name("admin.donations");
     Route::get('admin/report-requests', ReportRequestList::class)->name("admin.report-requests");

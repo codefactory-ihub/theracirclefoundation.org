@@ -1,7 +1,7 @@
 <div class="py-12">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Project') }}
+            {{ __($title ?? 'Create Project') }}
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -60,6 +60,8 @@
                         <div class="relative">
                             @if ($file["media_source"] == "Cloud")
                             <img src="{{ $file["media_file"]->temporaryUrl() }}">
+                            @elseif( $file["media_source"] == "cloudinary")
+                            <img src="{{ $file["media_file"] }}">
                             @else
                             <video src="{{ $file["media_file"] }}">
                                 @endif
@@ -77,7 +79,7 @@
                 </x-action-message>
 
                 <x-button wire:loading.attr="disabled" wire:target="photo" class="py-3.5 justify-center">
-                    {{ __('Create Project') }}
+                    {{ __($title ?? 'Create Project') }}
                 </x-button>
             </x-slot>
         </x-form-section>
