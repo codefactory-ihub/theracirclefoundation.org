@@ -28,7 +28,7 @@ class CreateProject extends Component
     public string $short_description;
     #[Validate('required')]
     public string $description;
-    public string $media_source = 'Cloud';
+    public string $media_source = 'cloudinary';
     public $media_file;
 
     #[Validate('required')]
@@ -40,7 +40,7 @@ class CreateProject extends Component
 
     public function addFile()
     {
-        $file_validation = $this->media_source === 'Youtube'
+        $file_validation = strtolower($this->media_source) === 'youtube'
             ? 'required|url|regex:/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/'
             : 'required'; // Max 2048 KB = 2 MB
 
@@ -60,7 +60,7 @@ class CreateProject extends Component
         ]);
 
 
-        // $this->media_source = 'Cloud';
+        // $this->media_source = 'cloudinary';
         $this->media_file = '';
     }
 

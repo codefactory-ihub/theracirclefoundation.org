@@ -55,7 +55,7 @@
                     </div>
 
                     @if (count($files) > 0)
-                    <div class="grid grid-cols-4 md:grid-cols-10">
+                    <div class="grid grid-cols-4 md:grid-cols-10 py-3">
                         @foreach ($files as $file)
                         <div class="relative">
                             @if ($file["media_source"] == "Cloud")

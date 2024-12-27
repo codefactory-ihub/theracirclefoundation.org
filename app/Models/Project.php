@@ -10,6 +10,7 @@ class Project extends Model
 {
     use HasFactory;
     use MediaAlly;
+
     protected $table = "projects";
     protected $fillable = [
         'name',
@@ -41,4 +42,17 @@ class Project extends Model
     {
         return $this->hasMany(ProjectsMedia::class);
     }
+
+    public function firstMedia()
+    {
+        return $this->hasOne(ProjectsMedia::class)->oldestOfMany();
+    }
+
+    public function firstImage()
+    {
+        return $this->hasOne(ProjectsMedia::class)
+            ->where('media_type', 'like', 'image/%')
+            ->oldestOfMany();
+    }
+
 }

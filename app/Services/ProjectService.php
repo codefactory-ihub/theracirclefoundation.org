@@ -46,7 +46,7 @@ class ProjectService
                     // For YouTube, just save the URL directly
                     $project->media()->create([
                         'source' => 'youtube',
-                        'media_type' => 'video', // assuming video type for YouTube links
+                        'media_type' => 'video/youtube', // assuming video type for YouTube links
                         'public_url' => $file['media_file'],
                         'public_id' => null,
                     ]);
@@ -76,7 +76,7 @@ class ProjectService
     {
         DB::beginTransaction();
         try {
-            $project = $this->find($projectKey);
+            $project = $this->getProjectByProjectkey($projectKey);
 
             // Extract files and other project data
             $files = $data['files'] ?? [];
@@ -135,7 +135,7 @@ class ProjectService
     public function delete(string $projectKey)
     {
         // Retrieve the project and its media files
-        $project = $this->find($projectKey)->with('media')->first();
+        $project = $this->getProjectByProjectkey($projectKey)->with('media')->first();
 
         if (!$project) {
             throw new NotFoundHttpException("Project not found.");
@@ -169,6 +169,7 @@ class ProjectService
             throw $e;
         }
     }
+
     public function deleteProjectMedia(string $public_id)
     {
         // Retrieve the project and its media files
@@ -204,9 +205,9 @@ class ProjectService
         }
     }
 
-    public function find(string $projectKey)
+    public function getProjectByProjectkey(string $projectKey)
     {
-        return Project::where('project_key', $projectKey);
+        return Project::with('media')->where('project_key', $projectKey)->firstOrFail();
     }
 
     public function all()
@@ -214,9 +215,14 @@ class ProjectService
         return Project::all();
     }
 
-    public function paginate(int $perPage = 3)
+    public function paginate(int $perPage = 15)
     {
-        return Project::paginate($perPage);
+        return Project::with('firstImage')->paginate($perPage);
+    }
+
+    public function getProjectById(int $id)
+    {
+        return Project::with('media')->findOrFail($id);
     }
 
     public function search(string $sortDirection, string $search, string $sortColumn, $perPage = 3)

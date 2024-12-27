@@ -1,7 +1,13 @@
 <?php
 
 use App\Livewire\Admin\{CreateProject, UpdateProject, DonationList, ProjectList, ReportRequestList, VolunteerList};
-use App\Livewire\{ContactPage, DonationsPage, ProjectsPage, VolunteerPage, HomePage, ReportRequestForm};
+use App\Livewire\{ContactPage,
+    DonationsPage,
+    ProjectsPage,
+    VolunteerPage,
+    HomePage,
+    ReportRequestForm,
+    ProjectDetailsPage};
 use Illuminate\Support\Facades\Route;
 
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
@@ -9,6 +15,7 @@ use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 Route::get('/', HomePage::class)->name("home");
 Route::get('/projects', ProjectsPage::class)->name("projects");
+Route::get('/project/{projectKey}', ProjectDetailsPage::class)->name("project-details");
 Route::get('/donate', DonationsPage::class)->name("donate");
 Route::get('/contact', ContactPage::class)->name("contact");
 Route::get('/volunteer', VolunteerPage::class)->name("volunteer");

@@ -41,7 +41,7 @@ class UpdateProject extends Component
     public array $new_files = [];
     public function render(ProjectService $projectService)
     {
-        $project = $projectService->find($this->projectKey)->with('media')->firstOrFail();
+        $project = $projectService->getProjectByProjectkey($this->projectKey)->with('media')->firstOrFail();
         $this->name = $project->name;
         $this->short_description = $project->short_description;
         $this->description = $project->description;

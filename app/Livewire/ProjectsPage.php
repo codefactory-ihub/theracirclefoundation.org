@@ -2,16 +2,19 @@
 
 namespace App\Livewire;
 
+use App\Services\ProjectService;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class ProjectsPage extends Component
 {
-    #[Layout('layouts.landing')] 
+    #[Layout('layouts.landing')]
     #[Title("Projects")]
-    public function render()
+    public function render(ProjectService $projectService)
     {
-        return view('livewire.projects-page');
+        $projects = $projectService->paginate();
+
+        return view('livewire.projects-page', compact('projects'));
     }
 }
