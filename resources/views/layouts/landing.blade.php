@@ -61,7 +61,7 @@
                             <div class="col-lg-12 d-none d-lg-block">
                                 <div class="top-menu">
                                     <div class="contact-info">
-                                        <a wire:navigate href="tel:+2349012245699" class="pera"> Call Me (+234) -901 224 5699<span class="pl-20 pr-20">/</span>info@theracircle.org</a>
+                                        <a wire:navigate href="tel:+2349012245699" class="pera"> Call Me (+234) -901 224 5699<span class="pl-20 pr-20">/</span>info@theracirclefoundation.org</a>
                                     </div>
                                     <div class="header-social-link">
                                         <ul class="listing">
@@ -206,7 +206,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-mail-fill"></i>
                                         </div>
-                                        <a wire:navigate class="single" href="mailto:info@theracircle.org">info@theracircle.org</a>
+                                        <a wire:navigate class="single" href="mailto:info@theracirclefoundation.org">info@theracirclefoundation.org</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
