@@ -27837,3 +27837,39 @@ label.required::after,
     font-size: 1.1rem;
     transition: background-color 0.3s ease;
 }
+
+.no-projects-message {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+.notification-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 600px;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-left: 4px solid #0d6efd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.notification-box svg {
+    color: #0d6efd;
+    flex-shrink: 0;
+}
+
+.notification-box p {
+    margin: 0;
+    color: #495057;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .notification-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}
