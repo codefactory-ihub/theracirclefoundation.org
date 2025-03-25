@@ -191,6 +191,9 @@
                                     <a wire:navigate class="single" href="{{route('projects')}}">Latest Projects</a>
                                 </li>
                                 <li class="single-list">
+                                    <a wire:navigate class="single" href="{{route('login')}}">Login</a>
+                                </li>
+                                <li class="single-list">
                                     <a wire:navigate class="single" href="/#about">Our Mission</a>
                                 </li>
                             </ul>

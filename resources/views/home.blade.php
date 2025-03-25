@@ -511,10 +511,13 @@
                 <h4 class="title">Explore Links</h4>
                 <ul class="imp-link">
                   <li class="single-list">
-                    <a class="single" href="/#about">About Company</a>
+                    <a class="single" href="/#about">About NGO</a>
                   </li>
                   <li class="single-list">
-                    <a class="single" href="{{route('home')}}">Latest Projects</a>
+                      <a wire:navigate class="single" href="{{route('login')}}">Login</a>
+                  </li>
+                  <li class="single-list">
+                    <a class="single" href="{{route('projects')}}">Latest Projects</a>
                   </li>
                   <li class="single-list">
                     <a class="single" href="/#about">Our Mission</a>

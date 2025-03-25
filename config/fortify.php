@@ -88,7 +88,7 @@ return [
 
     'prefix' => '',
 
-    'domain' => 'theracirclefoundation.org',
+    'domain' => null,
 
     /*
     |--------------------------------------------------------------------------
