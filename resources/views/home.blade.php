@@ -88,7 +88,7 @@
                     </div>
                     <!-- Logo Mobile-->
                     <div class="logo logo-mobile light-logo">
-                      <a href="index.html"><img src="/assets/images/icon/icon.png" alt="Theracircle Foundation Icon"></a>
+                      <a href="index.html"><img src="/assets/images/logo/logo.png" alt="Theracircle Foundation Icon"></a>
                     </div>
                   </div>
                   <div class="search-container">
