@@ -61,7 +61,7 @@
                             <div class="col-lg-12 d-none d-lg-block">
                                 <div class="top-menu">
                                     <div class="contact-info">
-                                        <a wire:navigate href="tel:+2349012245699" class="pera"> Call Me (+234) -901 224 5699<span class="pl-20 pr-20">/</span>info@theracirclefoundation.org</a>
+                                        <a wire:navigate href="tel:+2349012245699" class="pera"> Call Me (+234) 901 224 5699<span class="pl-20 pr-20">/</span>info@theracirclefoundation.org</a>
                                     </div>
                                     <div class="header-social-link">
                                         <ul class="listing">
@@ -127,9 +127,15 @@
                                         <!-- Right button -->
                                         <ul class="cart">
                                             <li class="cart-list d-lg-inline-block">
-                                                <a wire:navigate href="{{route("donate")}}" class="btn-primary-fill text-uppercase">
+                                                <a wire:navigate href="{{ route('donate') }}" class="btn-primary-fill text-uppercase">
                                                     <span class="pera">Donate</span>
                                                 </a>
+                                                @auth
+                                                    <a wire:navigate href="{{ route('dashboard') }}"
+                                                       class="btn-secondary-fill text-uppercase">
+                                                        <span class="pera">Dashboard</span>
+                                                    </a>
+                                                @endauth
                                             </li>
                                         </ul>
                                     </div>
@@ -191,7 +197,11 @@
                                     <a wire:navigate class="single" href="{{route('projects')}}">Latest Projects</a>
                                 </li>
                                 <li class="single-list">
-                                    <a wire:navigate class="single" href="{{route('login')}}">Login</a>
+                                    @auth
+                                        <a wire:navigate class="single" href="{{ route('dashboard') }}">Dashboard</a>
+                                    @else
+                                        <a wire:navigate class="single" href="{{ route('login') }}">Login</a>
+                                    @endauth
                                 </li>
                                 <li class="single-list">
                                     <a wire:navigate class="single" href="/#about">Our Mission</a>
@@ -209,7 +219,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-mail-fill"></i>
                                         </div>
-                                        <a wire:navigate class="single" href="mailto:info@theracirclefoundation.org">info@theracirclefoundation.org</a>
+                                        <a class="single" href="mailto:info@theracirclefoundation.org">info@theracirclefoundation.org</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
@@ -217,7 +227,7 @@
                                         <div class="imp-icon">
                                             <i class="ri-phone-fill"></i>
                                         </div>
-                                        <a wire:navigate class="single" href="tel:+2349012245699">(+234) -901 224 5699</a>
+                                        <a class="single" href="tel:+2349012245699">(+234) 901 224 5699</a>
                                     </div>
                                 </li>
                                 <li class="single-list">
@@ -318,9 +328,10 @@
     <script src="/assets/js/plugin.js"></script>
     <!-- Main js-->
     <script src="/assets/js/main.js"></script>
-    @livewireScripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @livewireScripts
+    @stack('scripts')
     <script>
         document.addEventListener('livewire:initialized', function() {
             Livewire.hook('component.init', ({

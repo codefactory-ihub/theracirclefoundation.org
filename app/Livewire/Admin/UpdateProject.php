@@ -13,6 +13,7 @@ class UpdateProject extends Component
 {
     use HandlesErrors;
     use WithFileUploads;
+
     public string $projectKey;
 
     // public function __construct(string $projectKey)
@@ -35,16 +36,23 @@ class UpdateProject extends Component
     public string $description;
     public string $media_source = 'Cloud';
     public $media_file;
+    // Archived status
+    #[Validate('required|boolean')]
+    public bool $archived;
 
     #[Validate('required')]
     public array $files = [];
     public array $new_files = [];
+
     public function render(ProjectService $projectService)
     {
-        $project = $projectService->getProjectByProjectkey($this->projectKey)->with('media')->firstOrFail();
+        $project = $projectService->getProjectByProjectkey($this->projectKey);
+
+
         $this->name = $project->name;
         $this->short_description = $project->short_description;
         $this->description = $project->description;
+        $this->archived = $project->archived;
         $this->project_date = $project->project_date;
 
         foreach ($project->media as $key => $value) {
@@ -107,19 +115,20 @@ class UpdateProject extends Component
     }
 
 
-
+    /**
+     * @throws \Exception
+     */
     public function saveForm(ProjectService $projectService)
     {
-        if ($this->media_file)
+        if ($this->media_file) {
             $this->addFile();
+        }
 
+        // Validate with unique rule that ignores current project
         $form = $this->validate();
+        $form['files'] = $this->new_files ?? [];
 
-        // $form['creator_id'] = Auth::id();
-        $form['files'] = $this->new_files;
-        // dd($form);
-
-        $projectService->update($this->projectKey,$form);
+        $projectService->update($this->projectKey, $form);
 
         return $this->redirect('/admin/projects/');
     }

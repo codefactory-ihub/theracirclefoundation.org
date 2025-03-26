@@ -21,21 +21,27 @@ class ProjectDetailsPage extends Component
     public function render(ProjectService $projectService)
     {
         $this->project = $projectService->getProjectByProjectkey($this->projectKey);
-        $this->setActiveMedia($this->project?->media[0]);
-
+    
+        if (isset($this->project?->media) && count($this->project->media) > 0) {
+            $this->setActiveMedia($this->project->media[0]['id']);
+        }
+        
         return view('livewire.project-details-page');
     }
 
-    public function setActiveMedia($media)
+    public function setActiveMedia(int $mediaId)
     {
         // Update the active media
-        $this->activeMedia = $media;
+        $this->activeMedia =  $this->project->media->first(function ($item) use ($mediaId) {
+            return $item['id'] == $mediaId;
+        });
 
         // Filter out the active media from the media array
         $media = $this->project->media->filter(function ($item) {
             return $item['id'] !== $this->activeMedia['id'];
         })->values()->toArray();
-
+        
+        // dd($media);
         // Reindex the array to avoid gaps in the array indices
         $this->media = array_values($media);
     }

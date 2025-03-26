@@ -14,25 +14,28 @@ class CreateProject extends Component
     use HandlesErrors;
     use WithFileUploads;
 
-    // protected ProjectService $projectService ;
-
-    // public function __construct(ProjectService $projectService){
-    //     $this->projectService = $projectService;
-    // }
-
     #[Validate('required|min:3|max:100')]
     public string $name;
+    
     #[Validate('required')]
     public string $project_date;
+    
     #[Validate('required')]
     public string $short_description;
+    
     #[Validate('required')]
     public string $description;
-    public string $media_source = 'cloudinary';
+    
+    // Archived status - default to false (Visible)
+    #[Validate('required|boolean')]
+    public bool $archived = false;
+    
+    public string $media_source = 'Cloud';
     public $media_file;
 
     #[Validate('required')]
     public array $files = [];
+
     public function render()
     {
         return view('livewire.admin.create-project');
@@ -44,14 +47,10 @@ class CreateProject extends Component
             ? 'required|url|regex:/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/'
             : 'required'; // Max 2048 KB = 2 MB
 
-        // $file_validation = '';
-
         $res = $this->validate([
             'media_source' => 'required',
             'media_file' => $file_validation,
         ]);
-
-        // dd($res);
 
         array_push($this->files, [
             'id' => uuid_create(),
@@ -59,8 +58,6 @@ class CreateProject extends Component
             'media_file' => $this->media_file,
         ]);
 
-
-        // $this->media_source = 'cloudinary';
         $this->media_file = '';
     }
 
@@ -71,17 +68,20 @@ class CreateProject extends Component
         });
     }
 
-
-
     public function saveForm(ProjectService $projectService)
     {
-        if ($this->media_file)
+        if ($this->media_file) {
             $this->addFile();
+        }
 
         $form = $this->validate();
 
         $form['creator_id'] = Auth::id();
-        // dd($form);
+        
+        // Convert archived to boolean if it comes as string
+        if (isset($form['archived']) && is_string($form['archived'])) {
+            $form['archived'] = (bool)$form['archived'];
+        }
 
         $projectService->create($form);
 

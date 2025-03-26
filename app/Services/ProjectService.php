@@ -82,52 +82,51 @@ class ProjectService
             $files = $data['files'] ?? [];
             unset($data['files']);
 
+            // First check if name is being changed and if it's unique
+            if (isset($data['name']) && $data['name'] !== $project->name) {
+                $exists = Project::where('name', $data['name'])
+                    ->where('project_key', '!=', $projectKey)
+                    ->exists();
+
+                if ($exists) {
+                    throw new \Exception('A project with this name already exists.');
+                }
+            }
+
             $project->update($data);
 
             foreach ($files as $file) {
                 if ($file['media_source'] === 'Cloud') {
-                    // Upload file to Cloudinary
                     $upload = Cloudinary::upload($file['media_file']->getRealPath(), [
                         'folder' => 'projects'
                     ]);
 
-                    // Get the public URL and public ID from Cloudinary response
-                    $publicUrl = $upload->getSecurePath();
-                    $publicId = $upload->getPublicId();
-
-                    // Save media record
                     $project->media()->create([
                         'source' => 'cloudinary',
                         'media_type' => $file['media_file']->getMimeType(),
-                        'public_url' => $publicUrl,
-                        'public_id' => $publicId,
+                        'public_url' => $upload->getSecurePath(),
+                        'public_id' => $upload->getPublicId(),
                     ]);
                 } elseif ($file['media_source'] === 'Youtube') {
-                    // For YouTube, just save the URL directly
                     $project->media()->create([
                         'source' => 'youtube',
-                        'media_type' => 'video', // assuming video type for YouTube links
+                        'media_type' => 'video',
                         'public_url' => $file['media_file'],
                         'public_id' => null,
                     ]);
                 }
             }
 
-            // Commit transaction after successful project and media creation
             DB::commit();
             return $project;
         } catch (\Exception $e) {
-            // Rollback transaction
             DB::rollBack();
 
             // Delete any uploaded Cloudinary files
-            foreach ($files as $file) {
-                if ($file['media_source'] === 'Cloud' && isset($file['public_id'])) {
-                    Cloudinary::destroy($file['public_id']);
-                }
+            if (isset($upload)) {
+                Cloudinary::destroy($upload->getPublicId());
             }
 
-            // Optionally, rethrow or handle the exception
             throw $e;
         }
     }

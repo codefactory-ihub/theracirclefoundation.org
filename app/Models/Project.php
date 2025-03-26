@@ -19,6 +19,7 @@ class Project extends Model
         'short_description',
         'description',
         'creator_id',
+        'archived',
     ];
 
     public function scopeSearch($query, $value)
