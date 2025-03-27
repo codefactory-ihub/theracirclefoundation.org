@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Services\VolunteerService;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -67,17 +68,48 @@ class VolunteerList extends Component
 
     public function acceptVolunteer(string $volunteerKey, VolunteerService $volunteerService)
     {
-        $volunteerService->acceptByKey($volunteerKey);
-        $this->resetPage();
+        try {
+            $volunteer = $volunteerService->acceptByKey($volunteerKey);
 
-        $this->dispatch('notification', "Volunteer has been accepted", "Action successful", "success");
+            // Send acceptance email
+            Mail::to($volunteer->email)->send(new VolunteerAcceptedMail($volunteer));
+
+            $this->resetPage();
+            $this->dispatch('notification',
+                "Volunteer has been accepted",
+                "Acceptance email sent",
+                "success"
+            );
+        } catch (\Exception $e) {
+            $this->dispatch('notification',
+                "Failed to accept volunteer",
+                $e->getMessage(),
+                "error"
+            );
+        }
     }
+
     public function rejectVolunteer(string $volunteerKey, VolunteerService $volunteerService)
     {
-        $volunteerService->rejectByKey($volunteerKey);
-        $this->resetPage();
+        try {
+            $volunteer = $volunteerService->rejectByKey($volunteerKey);
 
-        $this->dispatch('notification', "Volunteer has been rejected", "Action successful", "info");
+            // Send rejection email
+            Mail::to($volunteer->email)->send(new VolunteerRejectedMail($volunteer));
+
+            $this->resetPage();
+            $this->dispatch('notification',
+                "Volunteer has been rejected",
+                "Rejection email sent",
+                "info"
+            );
+        } catch (\Exception $e) {
+            $this->dispatch('notification',
+                "Failed to reject volunteer",
+                $e->getMessage(),
+                "error"
+            );
+        }
     }
 
     public function customFormat($column, $data)
