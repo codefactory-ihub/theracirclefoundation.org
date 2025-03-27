@@ -82,4 +82,25 @@ class ReportRequestList extends Component
     {
         session(['page' => $this->page]);
     }
+
+    public function acceptRequest($requestId)
+    {
+        $reportRequest = ReportRequest::findOrFail($requestId);
+        $reportRequest->update(['status' => 'accepted']);
+        $this->dispatch('notification', "Report request #{$requestId} has been accepted", "Action Successful", "success");
+    }
+
+    public function rejectRequest($requestId)
+    {
+        $reportRequest = ReportRequest::findOrFail($requestId);
+        $reportRequest->update(['status' => 'rejected']);
+        $this->dispatch('notification', "Report request #{$requestId} has been rejected", "Action Successful", "success");
+    }
+
+    public function completeRequest($requestId)
+    {
+        $reportRequest = ReportRequest::findOrFail($requestId);
+        $reportRequest->update(['status' => 'completed']);
+        $this->dispatch('notification', "Report request #{$requestId} marked as completed", "Action Completed", "success");
+    }
 }

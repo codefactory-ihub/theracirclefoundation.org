@@ -9,7 +9,7 @@ class ReportRequest extends Model
 {
     use HasFactory;
 
-    public $fillable = ['full_name', 'email', 'intention'];
+    public $fillable = ['full_name', 'email', 'intention', 'status'];
 
     public function scopeSearch($query, $value)
     {

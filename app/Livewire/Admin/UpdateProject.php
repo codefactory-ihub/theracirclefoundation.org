@@ -11,125 +11,133 @@ use Livewire\WithFileUploads;
 
 class UpdateProject extends Component
 {
-    use HandlesErrors;
-    use WithFileUploads;
+    use HandlesErrors, WithFileUploads;
 
     public string $projectKey;
-
-    // public function __construct(string $projectKey)
-    // {
-    //     $this->projectKey = $projectKey;
-    // }
     public string $title = "Update Project";
-
-    // public function __construct(ProjectService $projectService){
-    //     $this->projectService = $projectService;
-    // }
 
     #[Validate('required|min:3|max:100')]
     public string $name;
-    #[Validate('required')]
+
+    #[Validate('required|date')]
     public string $project_date;
-    #[Validate('required')]
+
+    #[Validate('required|min:10|max:255')]
     public string $short_description;
-    #[Validate('required')]
+
+    #[Validate('required|min:20')]
     public string $description;
-    public string $media_source = 'Cloud';
-    public $media_file;
-    // Archived status
+
     #[Validate('required|boolean')]
     public bool $archived;
 
-    #[Validate('required')]
+    #[Validate('required|in:Cloud,Youtube')]
+    public string $media_source = 'Cloud';
+
+    #[Validate('sometimes')]
+    public $media_file;
+
     public array $files = [];
     public array $new_files = [];
 
-    public function render(ProjectService $projectService)
+    public function mount(ProjectService $projectService)
     {
-        $project = $projectService->getProjectByProjectkey($this->projectKey);
-
+        $project = $projectService->getProjectByProjectKey($this->projectKey);
 
         $this->name = $project->name;
         $this->short_description = $project->short_description;
         $this->description = $project->description;
         $this->archived = $project->archived;
-        $this->project_date = $project->project_date;
 
-        foreach ($project->media as $key => $value) {
-            array_push($this->files, [
-                'id' => $value->public_id,
-                'media_source' => $value->source,
-                'media_file' => $value->public_url,
-            ]);
-        }
+        // Safely handle date conversion
+        $this->project_date = is_string($project->project_date)
+            ? $project->project_date
+            : $project->project_date->toDateString();
 
-        // dd($this->files);
-        return view('livewire.admin.create-project');
+        // Initialize files array
+        $this->files = $project->media->map(function ($media) {
+            return [
+                'id' => $media->public_id,
+                'media_source' => $media->source,
+                'media_file' => $media->public_url,
+                'is_new' => false
+            ];
+        })->toArray();
     }
 
     public function addFile()
     {
-        $file_validation = $this->media_source === 'Youtube'
-            ? 'required|url|regex:/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/'
-            : 'required'; // Max 2048 KB = 2 MB
-
-        // $file_validation = '';
-
-        $res = $this->validate([
-            'media_source' => 'required',
-            'media_file' => $file_validation,
+        $this->validate([
+            'media_source' => 'required|in:Cloud,Youtube',
+            'media_file' => $this->getMediaValidationRules(),
         ]);
 
-        // dd($res);
+        $fileId = uniqid();
 
-        array_push($this->files, [
-            'id' => uuid_create(),
+        $this->files[] = [
+            'id' => $fileId,
             'media_source' => $this->media_source,
             'media_file' => $this->media_file,
-        ]);
-        array_push($this->new_files, [
-            'id' => uuid_create(),
+            'is_new' => true
+        ];
+
+        $this->new_files[] = [
+            'id' => $fileId,
             'media_source' => $this->media_source,
-            'media_file' => $this->media_file,
-        ]);
+            'media_file' => $this->media_file
+        ];
 
-
-        // $this->media_source = 'Cloud';
-        $this->media_file = '';
+        $this->reset(['media_file', 'media_source']);
     }
 
     public function deleteFile($fileId, ProjectService $projectService)
     {
-        $this->files = array_filter($this->files, function ($file) use ($fileId, $projectService) {
-            $result = $file['id'] !== $fileId;
+        try {
+            // Find the file to determine if it's existing or new
+            $fileToDelete = collect($this->files)->firstWhere('id', $fileId);
 
-            if (!$result) {
+            if ($fileToDelete && !$fileToDelete['is_new']) {
                 $projectService->deleteProjectMedia($fileId);
             }
 
-            return $result;
-        });
-        $this->new_files = array_filter($this->new_files, function ($file) use ($fileId) {
-            return $file['id'] !== $fileId;
-        });
+            // Remove from both arrays
+            $this->files = array_filter($this->files, fn($file) => $file['id'] !== $fileId);
+            $this->new_files = array_filter($this->new_files, fn($file) => $file['id'] !== $fileId);
+
+        } catch (\Exception $e) {
+            $this->handleError($e);
+        }
     }
 
-
-    /**
-     * @throws \Exception
-     */
     public function saveForm(ProjectService $projectService)
     {
-        if ($this->media_file) {
-            $this->addFile();
+        try {
+            if ($this->media_file) {
+                $this->addFile();
+            }
+
+            $validated = $this->validate();
+            $validated['files'] = $this->new_files;
+
+            $projectService->update($this->projectKey, $validated);
+
+            session()->flash('success', 'Project updated successfully');
+            return redirect()->route('admin.projects');
+
+        } catch (\Exception $e) {
+            $this->handleError($e);
         }
+    }
 
-        // Validate with unique rule that ignores current project
-        $form = $this->validate();
-        $form['files'] = $this->new_files ?? [];
+    public function render()
+    {
+        return view('livewire.admin.create-project');
+    }
 
-        $projectService->update($this->projectKey, $form);
-
-        return $this->redirect('/admin/projects/');
+    protected function getMediaValidationRules(): array
+    {
+        return $this->media_source === 'Youtube'
+            ? ['required', 'url', 'regex:/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/']
+            : ['required', 'file', 'mimes:jpg,jpeg,png,gif,mp4,mov,avi', 'max:2048'];
     }
 }
